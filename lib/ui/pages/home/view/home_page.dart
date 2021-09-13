@@ -8,9 +8,6 @@ import 'package:wallhaven/ui/pages/home/view/home_view.dart';
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  static Route get route =>
-      MaterialPageRoute(builder: (context) => const HomePage());
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

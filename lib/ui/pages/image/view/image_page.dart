@@ -10,13 +10,6 @@ class ImagePage extends StatelessWidget {
 
   final ImageModel image;
 
-  static Route route({
-    required ImageModel image,
-  }) =>
-      MaterialPageRoute(
-        builder: (context) => ImagePage(image: image),
-      );
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

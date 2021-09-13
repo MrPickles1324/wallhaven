@@ -11,44 +11,17 @@ class WallhavenApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppCubit(),
-      child: AppView(),
-    );
-  }
-}
-
-class AppView extends StatelessWidget {
-  AppView({Key? key}) : super(key: key);
-
-  final _navigatorKey = GlobalKey<NavigatorState>();
-
-  NavigatorState get _navigator => _navigatorKey.currentState!;
-
-  @override
-  Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: _navigatorKey,
+      navigatorKey: GlobalKey<NavigatorState>(),
       debugShowCheckedModeBanner: false,
       builder: (context, child) => MultiRepositoryProvider(
         providers: [
           _setUpSettingsRepository(),
           _setUpWallhavenRepository(),
         ],
-        child: BlocListener<AppCubit, AppState>(
-          listener: (context, state) {
-            if (state is Home) {
-              _navigator.pushAndRemoveUntil(HomePage.route, (route) => false);
-            } else if (state is ImageOpened) {
-              _navigator.push(ImagePage.route(image: state.image));
-            } else if (state is SettingsOpened) {
-              //TODO: implement settings opened
-            }
-          },
-          child: child,
-        ),
+        child: child!,
       ),
-      onGenerateRoute: (settings) => HomePage.route,
+      home: const HomePage(),
     );
   }
 

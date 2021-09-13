@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:wallhaven/app_cubit/app_cubit.dart';
 
 import 'package:wallhaven/data/wallhaven_repository/image_model.dart';
+import 'package:wallhaven/ui/pages/image/view/image_page.dart';
 import 'package:wallhaven/ui/pages/image/view/image_view.dart';
+import 'package:animations/animations.dart';
 
 class GridImageCard extends StatelessWidget {
   const GridImageCard({
@@ -16,22 +18,25 @@ class GridImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        context.read<AppCubit>().openImage(image);
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          color: getBorderColor(),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: ClipRRect(
+    return OpenContainer(
+      openBuilder: (context, action) => ImagePage(
+        image: image,
+      ),
+      closedBuilder: (context, action) => InkWell(
+        onTap: action,
+        child: Container(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
-            child: CachedNetworkImage(
-              imageUrl: image.thumbs.original,
-              fit: BoxFit.fill,
+            color: getBorderColor(),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: CachedNetworkImage(
+                imageUrl: image.thumbs.original,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
         ),
