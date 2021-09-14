@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
-import 'package:wallhaven/data/wallhaven_repository/image_model.dart';
-import 'package:wallhaven/data/wallhaven_repository/model.dart';
+import 'package:wallhaven/data/wallhaven_repository/search_parameters.dart';
 import 'package:wallhaven/ui/pages/home/bloc/home_bloc.dart';
 import 'package:wallhaven/ui/pages/home/connectivity/connectivity_cubit.dart';
 import 'package:wallhaven/ui/widgets/grid_image_card.dart';
@@ -44,31 +43,27 @@ class _HomeViewState extends State<HomeView> {
             appBar: AppBar(
               title: Text(_getAppBarText(state)),
             ),
-            body: _imagesList(state.images),
+            body: _imagesList(state),
           );
         },
       ),
     );
   }
 
-  Widget _loading() => const Center(
-        child: CircularProgressIndicator(),
-      );
-
-  Widget _imagesList(List<ImageModel> images) {
-    debugPrint("images: ${images.length}");
+  Widget _imagesList(HomeState state) {
     return LazyLoadScrollView(
       onEndOfPage: () => _homeBloc.add(ReachedEndOfList()),
       child: StaggeredGridView.countBuilder(
         // controller: _scrollController,
-        itemCount: images.length,
+        itemCount: state.images.length,
         crossAxisCount: 4,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.all(3.0),
-          child: GridImageCard(image: images[index]),
+          child: GridImageCard(image: state.images[index]),
         ),
-        staggeredTileBuilder: (index) =>
-            StaggeredTile.fit(MediaQuery.of(context).size.width > 700 ? 1 : 2),
+        staggeredTileBuilder: (index) => StaggeredTile.fit(
+          MediaQuery.of(context).size.width > 800 ? 1 : 2,
+        ),
       ),
     );
   }
@@ -80,7 +75,7 @@ class _HomeViewState extends State<HomeView> {
       case Status.loading:
         return "Loading...";
       default:
-        return "";
+        return "Wallhaven";
     }
   }
 

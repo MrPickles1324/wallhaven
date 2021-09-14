@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:wallhaven/data/wallhaven_repository/image_model.dart';
-import 'package:wallhaven/data/wallhaven_repository/model.dart';
+import 'package:wallhaven/data/wallhaven_repository/search_parameters.dart';
 import 'package:wallhaven/data/wallhaven_repository/wallhaven_repository.dart';
 
 part 'home_event.dart';

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:wallhaven/data/wallhaven_repository/image_model.dart';
 
-import 'model.dart';
+import 'search_parameters.dart';
 
 class WallhavenRepository {
   final Dio _dio = Dio();

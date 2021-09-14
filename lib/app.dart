@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wallhaven/app_cubit/app_cubit.dart';
 import 'package:wallhaven/data/wallhaven_repository/wallhaven_repository.dart';
 import 'package:wallhaven/settings_repository.dart';
 import 'package:wallhaven/ui/pages/home/view/home_page.dart';
-import 'package:wallhaven/ui/pages/image/view/image_page.dart';
 
 class WallhavenApp extends StatelessWidget {
   const WallhavenApp({Key? key}) : super(key: key);
