@@ -12,18 +12,18 @@ class HomeState {
   HomeState(
     this.searchParameters, {
     this.status = Status.waitingConnection,
-    this.images = const <ImageModel>[],
+    this.images = const <WallhavenImage>[],
     this.hasReachedMax = false,
   });
 
   final Status status;
-  final List<ImageModel> images;
+  final List<WallhavenImage> images;
   final bool hasReachedMax;
   final SearchParameters searchParameters;
 
   HomeState copyWith({
     Status? status,
-    List<ImageModel>? images,
+    List<WallhavenImage>? images,
     bool? hasReachedMax,
     SearchParameters? searchParameters,
   }) {

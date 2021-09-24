@@ -5,7 +5,7 @@ import 'package:wallhaven/io/image_saver.dart';
 part 'image_state.dart';
 
 class ImagePageCubit extends Cubit<ImagePageState> {
-  ImagePageCubit({required ImageModel image, required String saveLocation})
+  ImagePageCubit({required WallhavenImage image, required String saveLocation})
       : super(ImagePageState(image: image, saveLocation: saveLocation));
 
   Future<void> download() async {

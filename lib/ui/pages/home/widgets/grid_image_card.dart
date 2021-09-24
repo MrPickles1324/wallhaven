@@ -10,7 +10,7 @@ class GridImageCard extends StatelessWidget {
     required this.image,
   }) : super(key: key);
 
-  final ImageModel image;
+  final WallhavenImage image;
 
   @override
   Widget build(BuildContext context) {

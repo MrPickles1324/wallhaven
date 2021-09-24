@@ -8,3 +8,8 @@ class ReachedEndOfList extends HomeEvent {}
 class LostConnection extends HomeEvent {}
 
 class GotConnection extends HomeEvent {}
+
+class SearchParametersChanged extends HomeEvent {
+  SearchParametersChanged({required this.searchParameters});
+  final SearchParameters searchParameters;
+}

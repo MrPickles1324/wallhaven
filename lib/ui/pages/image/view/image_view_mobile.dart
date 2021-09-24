@@ -44,11 +44,22 @@ class ImageViewMobile extends StatelessWidget {
                           alignment: Alignment.topCenter,
                           errorWidget: (context, url, error) =>
                               const Text("Error loading image"),
-                          placeholder: (context, url) => CachedNetworkImage(
-                            fit: BoxFit.fitWidth,
-                            alignment: Alignment.topCenter,
-                            imageUrl: state.image.thumbs.original,
-                          ),
+                          progressIndicatorBuilder: (context, url, progress) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                LinearProgressIndicator(
+                                  value: progress.progress,
+                                  color: Colors.pink[700],
+                                ),
+                                CachedNetworkImage(
+                                  fit: BoxFit.fitWidth,
+                                  alignment: Alignment.topCenter,
+                                  imageUrl: state.image.thumbs.original,
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
                       Container(

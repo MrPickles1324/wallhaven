@@ -11,12 +11,12 @@ class ImagePageState {
     required this.saveLocation,
     this.saveStatus = SaveStatus.success,
   });
-  final ImageModel image;
+  final WallhavenImage image;
   final SaveStatus saveStatus;
   final String saveLocation;
 
   ImagePageState copyWith({
-    ImageModel? image,
+    WallhavenImage? image,
     SaveStatus? saveStatus,
     String? saveLocation,
   }) {

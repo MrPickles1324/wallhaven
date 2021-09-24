@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 // generated from wallhaven api json
-class ImageModel {
+class WallhavenImage {
   final String id;
   final String url;
   final String short_url;
@@ -24,7 +24,7 @@ class ImageModel {
   final List<String> colors;
   final String path;
   final Thumbs thumbs;
-  ImageModel({
+  WallhavenImage({
     required this.id,
     required this.url,
     required this.short_url,
@@ -45,7 +45,7 @@ class ImageModel {
     required this.thumbs,
   });
 
-  ImageModel copyWith({
+  WallhavenImage copyWith({
     String? id,
     String? url,
     String? short_url,
@@ -65,7 +65,7 @@ class ImageModel {
     String? path,
     Thumbs? thumbs,
   }) {
-    return ImageModel(
+    return WallhavenImage(
       id: id ?? this.id,
       url: url ?? this.url,
       short_url: short_url ?? this.short_url,
@@ -110,8 +110,8 @@ class ImageModel {
     };
   }
 
-  factory ImageModel.fromMap(Map<String, dynamic> map) {
-    return ImageModel(
+  factory WallhavenImage.fromMap(Map<String, dynamic> map) {
+    return WallhavenImage(
       id: map['id'],
       url: map['url'],
       short_url: map['short_url'],
@@ -135,8 +135,8 @@ class ImageModel {
 
   String toJson() => json.encode(toMap());
 
-  factory ImageModel.fromJson(String source) =>
-      ImageModel.fromMap(json.decode(source));
+  factory WallhavenImage.fromJson(String source) =>
+      WallhavenImage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -147,7 +147,7 @@ class ImageModel {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is ImageModel &&
+    return other is WallhavenImage &&
         other.id == id &&
         other.url == url &&
         other.short_url == short_url &&

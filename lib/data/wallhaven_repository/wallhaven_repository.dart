@@ -8,15 +8,15 @@ class WallhavenRepository {
   static const String _baseUrl = "https://wallhaven.cc/";
   static const String _apiPath = "api/v1/search";
 
-  Future<List<ImageModel>> fetchImages(SearchParameters parameters) async {
-    List<ImageModel> images = [];
+  Future<List<WallhavenImage>> fetchImages(SearchParameters parameters) async {
+    List<WallhavenImage> images = [];
 
     _dio.options.baseUrl = _baseUrl;
     _dio.options.queryParameters = parameters.toQueryParameters();
     var result = await _dio.get(_apiPath);
 
     for (var image in result.data["data"]) {
-      images.add(ImageModel.fromMap(image));
+      images.add(WallhavenImage.fromMap(image));
     }
 
     return images;

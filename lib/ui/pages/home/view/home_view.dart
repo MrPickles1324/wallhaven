@@ -5,7 +5,7 @@ import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:wallhaven/data/wallhaven_repository/search_parameters.dart';
 import 'package:wallhaven/ui/pages/home/bloc/home_bloc.dart';
 import 'package:wallhaven/ui/pages/home/connectivity/connectivity_cubit.dart';
-import 'package:wallhaven/ui/widgets/grid_image_card.dart';
+import 'package:wallhaven/ui/pages/home/widgets/grid_image_card.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -15,7 +15,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final _scrollController = ScrollController();
   SearchParameters searchParameters = SearchParameters.defaultValues();
 
   late HomeBloc _homeBloc;
@@ -24,7 +23,6 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     _homeBloc = context.read<HomeBloc>();
-    _scrollController.addListener(_onScroll);
   }
 
   @override
@@ -77,20 +75,5 @@ class _HomeViewState extends State<HomeView> {
       default:
         return "Wallhaven";
     }
-  }
-
-  void _onScroll() {
-    if (_isBottom) {
-      _homeBloc.add(ReachedEndOfList());
-    }
-  }
-
-  bool get _isBottom {
-    if (!_scrollController.hasClients) return false;
-
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.offset;
-
-    return currentScroll >= (maxScroll * 0.9);
   }
 }

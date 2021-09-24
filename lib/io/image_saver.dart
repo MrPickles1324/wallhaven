@@ -1,7 +1,10 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+final Dio _dio = Dio();
 
 Future<bool> checkPermission() async {
   PermissionStatus perm = await Permission.storage.status;
@@ -23,11 +26,16 @@ Future<bool> _saveImageAndroid(String url, String path) async {
   var perm = await checkPermission();
   if (perm) {
     final file = await cache.getFileFromCache(url);
-    final fileName = url.split('/').last;
-    final newFile = File(path + fileName);
-    newFile.createSync();
-    newFile.writeAsBytes(file!.file.readAsBytesSync());
-    return true;
+    if (file != null) {
+      final fileName = url.split('/').last;
+      final newFile = File(path + fileName);
+      newFile.createSync();
+      newFile.writeAsBytes(file.file.readAsBytesSync());
+      return true;
+    } else {
+      await _dio.download(url, path);
+      return true;
+    }
   }
   return false;
 }

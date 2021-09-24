@@ -1,3 +1,5 @@
+/lib/data/unsplash_repository/keys.dart
+
 # Miscellaneous
 *.class
 *.log

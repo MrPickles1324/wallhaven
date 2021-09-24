@@ -25,6 +25,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield _mapGotConnectionState(state);
     } else if (event is LostConnection) {
       yield _mapLostConnectionToState(state);
+    } else if (event is SearchParametersChanged) {
+      yield* _mapSearchParametersChangedtoState(event, state);
     }
   }
 
@@ -63,5 +65,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeState _mapLostConnectionToState(HomeState state) {
     return state.copyWith(status: Status.waitingConnection);
+  }
+
+  Stream<HomeState> _mapSearchParametersChangedtoState(
+    SearchParametersChanged event,
+    HomeState state,
+  ) async* {
+    yield state.copyWith(
+      searchParameters: event.searchParameters,
+      hasReachedMax: false,
+      images: [],
+      status: Status.initial,
+    );
+    add(ReachedEndOfList());
   }
 }

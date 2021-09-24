@@ -10,7 +10,7 @@ import 'image_view_mobile.dart';
 class ImagePage extends StatelessWidget {
   const ImagePage({required this.image, Key? key}) : super(key: key);
 
-  final ImageModel image;
+  final WallhavenImage image;
 
   @override
   Widget build(BuildContext context) {
